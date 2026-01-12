@@ -1,0 +1,804 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codiva IT | Core</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="icon" href="assets/banner-image.png" type="image/x-icon">
+<!-- FAVICON -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/banner-image.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/banner-image.png">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+<link rel="icon" type="image/png" sizes="192x192" href="assets/banner-image.png">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/banner-image.png">
+
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent-glow: rgba(255, 255, 255, 0.2);
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Comfortaa', cursive;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- PARTICLES CONTAINER --- */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background: var(--bg-color);
+        }
+
+        /* --- TYPOGRAPHY & UTILS --- */
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--text-main);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* --- GLASSMORPHISM --- */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            padding: 10px 0;
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--text-main);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 60px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, #666);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            height: 30px; /* Space for typing animation */
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: 1px solid var(--text-main);
+            background: transparent;
+            color: var(--text-main);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 700;
+            transition: var(--transition);
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: var(--text-main);
+            color: var(--bg-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255,255,255,0.1);
+        }
+
+        /* --- CARDS & SERVICES --- */
+        section {
+            padding: 100px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            padding: 40px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.08);
+        }
+
+        .card i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--text-main);
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* --- TECH STACK (Infographic Style) --- */
+        .tech-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .tech-item {
+            padding: 15px 25px;
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            cursor: default;
+        }
+
+        .tech-item:hover {
+            background: var(--text-main);
+            color: var(--bg-color);
+        }
+
+        /* --- PRICING CALCULATOR MODULE --- */
+        .calculator-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        .calc-toggle-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 30px;
+            padding: 5px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .calc-mode-btn {
+            padding: 10px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 700;
+        }
+
+        .calc-mode-btn.active {
+            background: var(--text-main);
+            color: var(--bg-color);
+        }
+
+        .calc-options {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .calc-options.active {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .checkbox-group {
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            user-select: none;
+        }
+
+        .checkbox-group input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 25px;
+            width: 25px;
+            background-color: transparent;
+            border: 1px solid var(--text-muted);
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+
+        .checkbox-group:hover input ~ .checkmark {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .checkbox-group input:checked ~ .checkmark {
+            background-color: var(--text-main);
+            border-color: var(--text-main);
+        }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        .checkbox-group input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        .checkbox-group .checkmark:after {
+            left: 9px;
+            top: 5px;
+            width: 5px;
+            height: 10px;
+            border: solid var(--bg-color);
+            border-width: 0 3px 3px 0;
+            transform: rotate(45deg);
+        }
+
+        .total-price {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .price-display {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        .price-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* --- PROCESS & TIMELINE --- */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: var(--glass-border);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-container {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: var(--bg-color);
+            border: 4px solid var(--text-main);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .left { left: 0; }
+        .right { left: 50%; }
+        .left::before { content: " "; height: 0; position: absolute; top: 22px; width: 0; z-index: 1; right: 30px; border: medium solid white; border-width: 10px 0 10px 10px; border-color: transparent transparent transparent rgba(255,255,255,0.05); }
+        .right::before { content: " "; height: 0; position: absolute; top: 22px; width: 0; z-index: 1; left: 30px; border: medium solid white; border-width: 10px 10px 10px 0; border-color: transparent rgba(255,255,255,0.05) transparent transparent; }
+        .right::after { left: -10px; }
+
+        .content {
+            padding: 20px 30px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 6px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 50px 0;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            margin-top: 50px;
+        }
+
+        .social-icons {
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            color: var(--text-main);
+            font-size: 1.5rem;
+            margin: 0 15px;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            color: var(--text-muted);
+            transform: scale(1.1);
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media screen and (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .grid-3 { grid-template-columns: 1fr; }
+            .calc-options.active { grid-template-columns: 1fr; }
+            .timeline::after { left: 31px; }
+            .timeline-container { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-container::before { left: 60px; border: medium solid white; border-width: 10px 10px 10px 0; border-color: transparent rgba(255,255,255,0.05) transparent transparent; }
+            .left::after, .right::after { left: 21px; }
+            .right { left: 0%; }
+            .nav-links { display: none; } /* Simplified for demo */
+        }
+    </style>
+</head>
+<body>
+
+<div id="particles-js"></div>
+
+<nav id="navbar" class="glass">
+    <div class="container nav-content">
+        <a href="/" class="logo">CODIVA</a>
+        <ul class="nav-links">
+            <li><a href="#services">Usługi</a></li>
+            <li><a href="#tech">Technologie</a></li>
+            <li><a href="#pricing">Wycena</a></li>
+            <li><a href="#process">Proces</a></li>
+            <li><a href="#contact">Kontakt</a></li>
+        </ul>
+    </div>
+</nav>
+
+<header class="hero">
+    <div class="hero-content">
+        <h1>Code & Hardware</h1>
+        <div class="hero-subtitle" id="typing-text"></div>
+        <a href="#pricing" class="btn">Rozpocznij Współpracę</a>
+    </div>
+</header>
+
+<section id="services" class="reveal">
+    <div class="container">
+        <h2 class="section-title">Kompetencje</h2>
+        <div class="grid-3">
+            <article class="card glass">
+                <i class="fa-solid fa-code"></i>
+                <h3>Web Development</h3>
+                <p>Tworzenie responsywnych stron, sklepów e-commerce i aplikacji webowych. HTML5, CSS3, JS, React.</p>
+            </article>
+
+            <article class="card glass">
+                <i class="fa-solid fa-microchip"></i>
+                <h3>Serwis IT</h3>
+                <p>Diagnostyka sprzętowa, wymiana podzespołów, czyszczenie układów chłodzenia, modernizacja PC.</p>
+            </article>
+
+            <article class="card glass">
+                <i class="fa-solid fa-network-wired"></i>
+                <h3>Administracja</h3>
+                <p>Konfiguracja sieci domowych i firmowych, serwery NAS, bezpieczeństwo danych i backupy.</p>
+            </article>
+        </div>
+    </div>
+    
+
+<section id="tech" class="reveal">
+    <div class="container">
+        <h2 class="section-title">Technologie</h2>
+        <div class="tech-grid">
+            <div class="tech-item">HTML5 Semantic</div>
+            <div class="tech-item">CSS3 / SASS</div>
+            <div class="tech-item">JavaScript ES6+</div>
+            <div class="tech-item">React.js</div>
+            <div class="tech-item">Node.js</div>
+            <div class="tech-item">Python</div>
+            <div class="tech-item">Hardware Diagnostics</div>
+            <div class="tech-item">Linux Admin</div>
+            <div class="tech-item">Network Security</div>
+        </div>
+    </div>
+</section>
+
+<section id="pricing" class="reveal">
+    <div class="container">
+        <h2 class="section-title">Estymator Kosztów</h2>
+        
+        <div class="calculator-wrapper glass">
+            <div class="calc-toggle-container">
+                <div class="calc-mode-btn active" onclick="setMode('dev')">Development</div>
+                <div class="calc-mode-btn" onclick="setMode('service')">Serwis IT</div>
+            </div>
+
+            <div id="dev-options" class="calc-options active">
+                <label class="checkbox-group">Strona Wizytówka (Landing Page)
+                    <input type="checkbox" value="700" onchange="calculateTotal()">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="checkbox-group">System CMS (WordPress/Custom)
+                    <input type="checkbox" value="1500" onchange="calculateTotal()">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="checkbox-group">Sklep Internetowy
+                    <input type="checkbox" value="2500" onchange="calculateTotal()">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="checkbox-group">Optymalizacja SEO / Speed
+                    <input type="checkbox" value="300" onchange="calculateTotal()">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+
+            <div id="service-options" class="calc-options">
+                <label class="checkbox-group">Diagnostyka Wstępna
+                    <input type="checkbox" value="50" onchange="calculateTotal()">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="checkbox-group">Czyszczenie & Konserwacja
+                    <input type="checkbox" value="150" onchange="calculateTotal()">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="checkbox-group">Formatowanie & Instalacja Systemu
+                    <input type="checkbox" value="170" onchange="calculateTotal()">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="checkbox-group">Odzyskiwanie Danych
+                    <input type="checkbox" value="250" onchange="calculateTotal()">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+
+            <div class="total-price">
+                <div class="price-label">Szacunkowy koszt (netto):</div>
+                <div class="price-display"><span id="total-amount">0</span> PLN</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="process" class="reveal">
+    <div class="container">
+        <h2 class="section-title">Proces Współpracy</h2>
+        <div class="timeline">
+            <div class="timeline-container left">
+                <div class="content">
+                    <h3>01. Analiza</h3>
+                    <p>Konsultacja potrzeb, audyt sprzętu lub specyfikacja projektu.</p>
+                </div>
+            </div>
+            <div class="timeline-container right">
+                <div class="content">
+                    <h3>02. Realizacja</h3>
+                    <p>Kodowanie projektu lub naprawa sprzętu z pełną dokumentacją.</p>
+                </div>
+            </div>
+            <div class="timeline-container left">
+                <div class="content">
+                    <h3>03. Testy</h3>
+                    <p>Testy wydajnościowe, security check, weryfikacja stabilności.</p>
+                </div>
+            </div>
+            <div class="timeline-container right">
+                <div class="content">
+                    <h3>04. Wdrożenie</h3>
+                    <p>Publikacja strony lub oddanie sprzętu + gwarancja.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br>
+<footer id="contact" class="glass">
+    <div class="container">
+        <h2>Skontaktuj się</h2> <br>
+       <h3><a style="color: aliceblue;text-decoration: none;font: Comfortaa;" href="tel:570482594" target="_blank"> 570 482 594</a></h3>
+
+        <p style="margin-top: 15px; color: var(--text-muted);">Masz projekt lub problem ze sprzętem? Napisz.</p><br>
+        
+<!--  Telefon = Mail      -->
+        
+        
+        <div class="social-icons">
+            <a href="https://github.com" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://linkedin.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="mailto:ssl.biuro@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+        
+        <p style="margin-top: 50px; font-size: 0.8rem; opacity: 0.5;">
+            &copy; 2026 Codiva IT Core. All Rights Reserved.
+        </p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+    // 1. PARTICLES CONFIG
+    particlesJS("particles-js", {
+        "particles": {
+            "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+            "color": { "value": "#ffffff" },
+            "shape": { "type": "circle" },
+            "opacity": { "value": 0.2, "random": true },
+            "size": { "value": 3, "random": true },
+            "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.1, "width": 1 },
+            "move": { "enable": true, "speed": 1, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+        },
+        "interactivity": {
+            "detect_on": "canvas",
+            "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" } },
+            "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } } }
+        },
+        "retina_detect": true
+    });
+
+    // 2. TYPING EFFECT
+    const textElement = document.getElementById('typing-text');
+    const texts = ["Full Stack Developer", "IT Hardware Specialist", "System Administrator"];
+    let textIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function type() {
+        const currentText = texts[textIndex];
+        if (isDeleting) {
+            textElement.textContent = currentText.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            textElement.textContent = currentText.substring(0, charIndex + 1);
+            charIndex++;
+        }
+
+        let typeSpeed = isDeleting ? 50 : 100;
+
+        if (!isDeleting && charIndex === currentText.length) {
+            isDeleting = true;
+            typeSpeed = 2000; // Pause at end
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            textIndex = (textIndex + 1) % texts.length;
+            typeSpeed = 500;
+        }
+
+        setTimeout(type, typeSpeed);
+    }
+    document.addEventListener('DOMContentLoaded', type);
+
+    // 3. SCROLL REVEAL ANIMATION
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealOnScroll = () => {
+        const windowHeight = window.innerHeight;
+        const elementVisible = 150;
+        revealElements.forEach((reveal) => {
+            const elementTop = reveal.getBoundingClientRect().top;
+            if (elementTop < windowHeight - elementVisible) {
+                reveal.classList.add('active');
+            }
+        });
+        
+        // Navbar Scrolled Effect
+        const nav = document.getElementById('navbar');
+        if (window.scrollY > 50) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        }
+    };
+    window.addEventListener('scroll', revealOnScroll);
+
+    // 4. PRICING CALCULATOR LOGIC
+    let currentMode = 'dev';
+
+    function setMode(mode) {
+        currentMode = mode;
+        
+        // Update Buttons
+        document.querySelectorAll('.calc-mode-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+
+        // Toggle Options Display
+        document.getElementById('dev-options').classList.remove('active');
+        document.getElementById('service-options').classList.remove('active');
+        
+        // Reset Checkboxes when switching? Optional. Here we keep state but hide.
+        // To reset: document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+
+        document.getElementById(mode + '-options').classList.add('active');
+        calculateTotal();
+    }
+
+    function calculateTotal() {
+        let total = 0;
+        const activeContainer = document.getElementById(currentMode + '-options');
+        const checkboxes = activeContainer.querySelectorAll('input[type="checkbox"]:checked');
+        
+        checkboxes.forEach(box => {
+            total += parseInt(box.value);
+        });
+
+        // Animation for numbers
+        const display = document.getElementById('total-amount');
+        animateValue(display, parseInt(display.innerText), total, 500);
+    }
+
+    function animateValue(obj, start, end, duration) {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            obj.innerHTML = Math.floor(progress * (end - start) + start);
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
+    }
+</script>
+
+</body>
+</html>
